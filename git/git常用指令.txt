@@ -1,0 +1,96 @@
+创建版本库
+git init
+
+添加到仓库
+git add
+
+提交到仓库
+git commit -m“”（“表示本次提交到说明”）
+
+工作区状态
+git status
+
+查看修改内容
+git diff
+
+查看更改内容
+git log
+
+查看历史命令
+git relog
+
+回退到上一个版本
+git reset --hard +（commit id号）
+git reset --hard HEAD^ （回退到上一个版本^^回退到上两个版本)
+
+查看工作区和版本库里面最新版本的区别
+git diff HEAD -- readme.txt
+
+把文件在工作区的修改全部撤销最近一次git commit或git add时的状态。
+git checkout -- readme.txt
+
+把暂存区的修改撤销掉（unstage），重新放回工作区
+git reset HEAD file
+
+删除该文件，并文件就从版本库中被删除
+用命令git rm删掉，并且git commit
+
+查看秘钥是否存在
+打开终端查看是否已经存在SSH密钥：cd ~/.ssh
+如果没有密钥则不会有此文件夹，有则备份删除,   也可以直接删除,  
+生成新的秘钥, 命令如下
+$ssh-keygen -t rsa -C "youremail@example.com"
+
+打开ssh密匙文件
+open ~/.ssh
+
+关联git远程库
+$ git remote add origin git@github.com:michaelliao/learngit.git
+
+把本地库的所有内容推送到远程库上：
+$ git push -u origin master
+
+git add . ：他会监控工作区的状态树，使用它会把工作时的所有变化提交到暂存区，包括文件内容修改(modified)以及新文件(new)，但不包括被删除的文件。
+
+git add -u ：他仅监控已经被add的文件（即tracked file），他会将被修改的文件提交到暂存区。add -u 不会提交新文件（untracked file）。（git add --update的缩写）
+
+git add -A ：是上面两个功能的合集（git add --all的缩写）
+
+克隆远程库
+git clone git@github.com:michaelliao/gitskills.git
+
+
+
+git checkout命令加上-b参数表示创建并切换，相当于以下两条命令：
+$ git branch dev
+$ git checkout dev
+Switched to branch 'dev'
+
+
+用git branch命令查看当前分支：
+
+把dev分支的工作成果合并到master分支
+git merge dev
+
+删除dev分支
+git branch -d dev
+
+通常，合并分支时，如果可能，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。
+准备合并dev分支，请注意--no-ff参数，表示禁用Fast forward
+git merge --no-ff -m "merge with no-ff" dev
+
+通过git branch recover_branch[新分支] commit_id 来建立一个新的分支
+
+敲命令git tag <name>就可以打一个新标签：
+git checkout master
+git tag v1.0
+可以用git show <tagname>查看标签信息：
+还可以创建带有说明的标签，用-a指定标签名，-m指定说明文字：
+$ git tag -a v0.1 -m "version 0.1 released" 3628164
+
+如果标签打错了，也可以删除：
+$ git tag -d v0.1
+如果要推送某个标签到远程，使用命令git push origin <tagname>：
+$ git push origin v1.0
+一次性推送全部尚未推送到远程的本地标签：
+$ git push origin --tags
